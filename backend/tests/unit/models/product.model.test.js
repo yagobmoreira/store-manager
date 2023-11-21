@@ -2,7 +2,12 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const { productModel } = require('../../../src/models');
-const { productsFromModel, productFromModel } = require('../mocks/products.mock');
+const { 
+  productsFromModel,
+  productFromModel,
+  productIdFromDB,
+  productIdFromModel,
+} = require('../mocks/products.mock');
 
 describe('Realizando Testes - PRODUCT MODEL', function () {
   afterEach(function () {
@@ -35,5 +40,15 @@ describe('Realizando Testes - PRODUCT MODEL', function () {
     const product = await productModel.findById(inputData);
 
     expect(product).to.be.equal(undefined);
+  });
+
+  it('Inserindo um product com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([productIdFromDB]);
+
+    const inputData = { name: 'Novo Produto' };
+    const insertId = await productModel.insert(inputData);
+
+    expect(insertId).to.be.a('number');
+    expect(insertId).to.be.equal(productIdFromModel);
   });
 });
