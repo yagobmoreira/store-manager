@@ -11,5 +11,11 @@ route.post(
   middlewares.validateProductFields,
   productController.createProduct,
 );
+route.put(
+  '/:id',
+  middlewares.validateProductFields,
+  middlewares.validadeProductIdPut,
+  productController.updateProduct,
+);
 
 module.exports = route;
