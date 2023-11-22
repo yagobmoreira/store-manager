@@ -158,7 +158,7 @@ describe('Realizando testes - MIDDLEWARES', function () {
     });
   });
 
-  describe('ValidateProductId', function () {
+  describe('Validate productId from Sales', function () {
     it('Requisição com productId inválido', async function () {
       sinon.stub(productModel, 'findAll')
         .resolves(productsFromModel);
@@ -170,7 +170,7 @@ describe('Realizando testes - MIDDLEWARES', function () {
       };
       const next = sinon.stub().returns();
       
-      await middlewares.validateProductId(req, res, next);
+      await middlewares.validateProductIdFromSales(req, res, next);
   
       expect(next).to.not.have.been.calledWith();
       expect(res.status).to.have.been.calledWith(404);
@@ -188,7 +188,7 @@ describe('Realizando testes - MIDDLEWARES', function () {
       };
       const next = sinon.stub().returns();
       
-      await middlewares.validateProductId(req, res, next);
+      await middlewares.validateProductIdFromSales(req, res, next);
   
       expect(next).to.have.been.calledWith();
     });

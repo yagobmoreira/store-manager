@@ -1,11 +1,11 @@
 const validateProductFields = require('./validateProductFields');
 const validateSaleFields = require('./validateSaleFields');
-const validateProductId = require('./validateProductId');
-const validadeProductIdPut = require('./validateProductIdPut');
+const validateProductIdFromSales = require('./validateProductIdFromSales');
+const validadeProductId = require('./validateProductId');
 
 module.exports = {
   validateProductFields,
   validateSaleFields,
-  validateProductId,
-  validadeProductIdPut,
+  validateProductIdFromSales,
+  validadeProductId,
 };

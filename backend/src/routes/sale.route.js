@@ -9,7 +9,7 @@ route.get('/:id', saleController.findById);
 route.post(
   '/',
   middlewares.validateSaleFields,
-  middlewares.validateProductId,
+  middlewares.validateProductIdFromSales,
   saleController.createSale,
 );
 

@@ -26,9 +26,17 @@ const updateProduct = async (productData) => {
   }
 };
 
+const deleteProduct = async (id) => {
+  const affectedRows = await productModel.remove(id);
+  if (affectedRows > 0) {
+    return { status: 'NO_CONTENT' };
+  }
+};
+
 module.exports = {
   getAllProducts,
   findProductById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

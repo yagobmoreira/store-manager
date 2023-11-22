@@ -1,13 +1,12 @@
 const { productModel } = require('../models');
 
-const validateProductId = async (req, res, next) => {
-  const saleData = req.body;
+const validadeProductId = async (req, res, next) => {
+  const requestId = Number(req.params.id);
 
   const products = await productModel.findAll();
-  
   const productsIds = products.map(({ id }) => id);
 
-  const isValidProductId = saleData.every(({ productId }) => productsIds.includes(productId));
+  const isValidProductId = productsIds.includes(requestId);
 
   if (!isValidProductId) {
     return res.status(404).json({ message: 'Product not found' });
@@ -16,4 +15,4 @@ const validateProductId = async (req, res, next) => {
   next();
 };
 
-module.exports = validateProductId;
+module.exports = validadeProductId;

@@ -14,8 +14,13 @@ route.post(
 route.put(
   '/:id',
   middlewares.validateProductFields,
-  middlewares.validadeProductIdPut,
+  middlewares.validadeProductId,
   productController.updateProduct,
+);
+route.delete(
+  '/:id',
+  middlewares.validadeProductId,
+  productController.deleteProduct,
 );
 
 module.exports = route;
