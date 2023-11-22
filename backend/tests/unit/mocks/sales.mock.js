@@ -69,6 +69,17 @@ const saleFromServiceCreated = {
   data: saleCreatedFromModel,
 };
 
+const salesFromDB = [
+  {
+    id: 1,
+    date: '2023-11-21T19:52:27.000Z',
+  },
+  {
+    id: 2,
+    date: '2023-11-21T19:52:27.000Z',
+  },
+];
+
 module.exports = {
   salesFromModel,
   saleFromModel,
@@ -79,4 +90,5 @@ module.exports = {
   saleIdFromModel,
   saleFromServiceCreated,
   saleCreatedFromModel,
+  salesFromDB,
 };

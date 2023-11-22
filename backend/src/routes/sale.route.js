@@ -12,5 +12,10 @@ route.post(
   middlewares.validateProductIdFromSales,
   saleController.createSale,
 );
+route.delete(
+  '/:id',
+  middlewares.validateSaleId,
+  saleController.deleteSale,
+);
 
 module.exports = route;

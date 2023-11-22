@@ -76,4 +76,46 @@ describe('Realizando Testes - PRODUCT CONTROLLER', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(productCreatedFromModel);
   });
+
+  it('Atualizando um product - status 200', async function () {
+    sinon.stub(productService, 'updateProduct').resolves(productFromService);
+
+    const req = { params: { id: 1 }, body: { name: 'Novo nome' } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await productController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productFromModel);
+  });
+
+  it('Não atualiza um product com id inexistente - status 404', async function () {
+    sinon.stub(productService, 'updateProduct').resolves(productFromServiceNotFound);
+
+    const req = { params: { id: 978327131 }, body: { name: 'Novo nome' } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await productController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith(sinon.match.has('message'));
+  });
+
+  it('Removendo um product - status 204', async function () {
+    sinon.stub(productService, 'deleteProduct').resolves({ status: 'NO_CONTENT' });
+
+    const req = { params: { id: 1 }, body: {} };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      end: sinon.stub(),
+    };
+
+    await productController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.end).to.have.been.calledWith();
+  });
 });

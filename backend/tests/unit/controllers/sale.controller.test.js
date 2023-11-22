@@ -88,4 +88,18 @@ describe('Realizando Testes - SALE CONTROLLER', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(saleCreatedFromModel);
   });
+
+  it('Removendo uma sale com sucesso - status 204', async function () {
+    sinon.stub(saleService, 'deleteSale').resolves({ status: 'NO_CONTENT' });
+
+    const req = { params: { id: 1 }, body: {} };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      end: sinon.stub(),
+    };
+
+    await saleController.deleteSale(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.end).to.have.been.calledWith();
+  });
 });

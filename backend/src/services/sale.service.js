@@ -19,8 +19,16 @@ const createSale = async (sale) => {
   return { status: 'CREATED', data };
 };
 
+const deleteSale = async (id) => {
+  const affectedRows = await saleModel.remove(id);
+  if (affectedRows > 0) {
+    return { status: 'NO_CONTENT' };
+  }
+};
+
 module.exports = {
   getAllSales,
   findSaleById,
   createSale,
+  deleteSale,
 };

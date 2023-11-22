@@ -1,6 +1,12 @@
 const camelize = require('camelize');
 const connection = require('./connection');
 
+const getAllSales = async () => {
+  const query = 'SELECT * FROM sales';
+  const [sales] = await connection.execute(query);
+  return camelize(sales);
+};
+
 const findAll = async () => {
   const query = `SELECT sp.sale_id, s.date, sp.product_id, sp.quantity 
   FROM sales s INNER JOIN sales_products sp ON sp.sale_id = s.id`;
@@ -40,10 +46,16 @@ const insert = async (sale) => {
   return insertId;
 };
 
-insert();
+const remove = async (id) => {
+  const query = 'DELETE FROM sales WHERE id = ?';
+  const [{ affectedRows }] = await connection.execute(query, [id]);
+  return affectedRows;
+};
 
 module.exports = {
   findAll,
   findById,
   insert,
+  getAllSales,
+  remove,
 };

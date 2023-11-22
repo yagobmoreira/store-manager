@@ -51,4 +51,44 @@ describe('Realizando Testes - PRODUCT MODEL', function () {
     expect(insertId).to.be.a('number');
     expect(insertId).to.be.equal(productIdFromModel);
   });
+
+  it('Atualizando um product com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const inputData = { id: 1, name: 'Novo Nome' };
+    const affectedRows = await productModel.update(inputData);
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(1);
+  });
+
+  it('Não atualiza um product com id inválido', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+
+    const inputData = { id: 77136712, name: 'Novo Nome' };
+    const affectedRows = await productModel.update(inputData);
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(0);
+  });
+
+  it('Removendo um product com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const inputData = 1;
+    const affectedRows = await productModel.remove(inputData);
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(1);
+  });
+
+  it('Não remove um product com id inválido', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+
+    const inputData = 878781;
+    const affectedRows = await productModel.remove(inputData);
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(0);
+  });
 });

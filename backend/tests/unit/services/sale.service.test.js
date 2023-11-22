@@ -110,4 +110,13 @@ describe('Realizando testes - SALE SERVICE', function () {
     expect(responseService.status).to.be.equal('CREATED');
     expect(responseService.data).to.deep.equal(responseData);
   });
+
+  it('Removendo uma sale com sucesso', async function () {
+    sinon.stub(saleModel, 'remove').resolves(1);
+
+    const inputData = 1;
+    const responseService = await saleService.deleteSale(inputData);
+
+    expect(responseService.status).to.be.equal('NO_CONTENT');
+  });
 });

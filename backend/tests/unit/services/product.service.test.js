@@ -84,4 +84,32 @@ describe('Realizando testes - PRODUCT SERVICE', function () {
     expect(responseService.status).to.be.equal('CREATED');
     expect(responseService.data).to.deep.equal(responseData);
   });
+
+  it('Atualizando um product com sucesso', async function () {
+    sinon.stub(productModel, 'update').resolves(1);
+    sinon.stub(productModel, 'findById').resolves(productFromModel);
+
+    const inputData = {
+      id: 1,
+      name: 'Martelo de Thor',
+    };
+
+    const responseData = {
+      id: 1,
+      name: 'Martelo de Thor',
+    };
+
+    const responseService = await productService.updateProduct(inputData);
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+    expect(responseService.data).to.deep.equal(responseData);
+  });
+
+  it('Removendo um product com sucesso', async function () {
+    sinon.stub(productModel, 'remove').resolves(1);
+
+    const inputData = 1;
+
+    const responseService = await productService.deleteProduct(inputData);
+    expect(responseService.status).to.be.equal('NO_CONTENT');
+  });
 });

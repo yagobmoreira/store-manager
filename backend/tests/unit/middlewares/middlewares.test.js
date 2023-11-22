@@ -193,4 +193,40 @@ describe('Realizando testes - MIDDLEWARES', function () {
       expect(next).to.have.been.calledWith();
     });
   });
+
+  describe('Validate productId', function () {
+    it('Requisição com productId inválido', async function () {
+      sinon.stub(productModel, 'findAll')
+        .resolves(productsFromModel);
+          
+      const req = { params: { id: 0 }, body: {} };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+      const next = sinon.stub().returns();
+      
+      await middlewares.validadeProductId(req, res, next);
+  
+      expect(next).to.not.have.been.calledWith();
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+
+    it('Requisição com productId válido', async function () {
+      sinon.stub(productModel, 'findAll')
+        .resolves(productsFromModel);
+          
+      const req = { params: { id: 1 }, body: {} };
+      const res = {
+        status: sinon.stub().returnsThis(),
+        json: sinon.stub(),
+      };
+      const next = sinon.stub().returns();
+      
+      await middlewares.validadeProductId(req, res, next);
+  
+      expect(next).to.have.been.calledWith();
+    });
+  });
 });
