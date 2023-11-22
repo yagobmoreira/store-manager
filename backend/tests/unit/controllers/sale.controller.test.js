@@ -9,6 +9,8 @@ const {
   saleFromModel,
   saleFromService,
   saleFromServiceNotFound,
+  saleFromServiceCreated,
+  saleCreatedFromModel,
 } = require('../mocks/sales.mock');
 
 const { expect } = chai;
@@ -59,5 +61,31 @@ describe('Realizando Testes - SALE CONTROLLER', function () {
     await saleController.findById(req, res);
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith(sinon.match.has('message'));
+  });
+
+  it('Criando uma nova sale com sucesso - status 201', async function () {
+    sinon.stub(saleService, 'createSale').resolves(saleFromServiceCreated);
+
+    const inputData = [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ];
+
+    const req = { params: { }, body: { inputData } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    await saleController.createSale(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(saleCreatedFromModel);
   });
 });

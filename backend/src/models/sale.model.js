@@ -17,7 +17,33 @@ const findById = async (saleId) => {
   return camelize(sale);
 };
 
+const saveSalesProducts = async (sale, saleId) => {
+  let insertPromises = [];
+
+  if (sale && sale.length > 0) {
+    insertPromises = sale.map(({ productId, quantity }) => connection.execute(
+      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUE (?, ?, ?)',
+      [saleId, productId, quantity],
+    ));
+    await Promise.all(insertPromises);
+  }
+};
+
+const insert = async (sale) => {
+  // https://www.geeksforgeeks.org/how-to-convert-javascript-datetime-to-mysql-datetime/
+  const currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const query = 'INSERT INTO sales (date) VALUE (?)';
+  const [{ insertId }] = await connection.execute(query, [currentDate]);
+  
+  await saveSalesProducts(sale, insertId);
+
+  return insertId;
+};
+
+insert();
+
 module.exports = {
   findAll,
   findById,
+  insert,
 };
