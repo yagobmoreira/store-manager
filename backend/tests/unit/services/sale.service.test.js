@@ -66,6 +66,18 @@ describe('Realizando testes - SALE SERVICE', function () {
     expect(responseService.data).to.deep.equal(responseData);
   });
 
+  it('Recuperando sales pelo id com falha', async function () {
+    sinon.stub(saleModel, 'findById').resolves(undefined);
+
+    const inputData = 99889;
+    const responseData = { message: 'Sale not found' };
+
+    const responseService = await saleService.findSaleById(inputData);
+
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.deep.equal(responseData);
+  });
+
   it('Criando uma nova sale com sucesso', async function () {
     sinon.stub(saleModel, 'insert').resolves(saleIdFromModel);
     const inputData = [

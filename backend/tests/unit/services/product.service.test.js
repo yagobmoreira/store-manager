@@ -53,6 +53,20 @@ describe('Realizando testes - PRODUCT SERVICE', function () {
     expect(responseService.data).to.deep.equal(responseData);
   });
 
+  it('Recuperando um product pelo id que não existe', async function () {
+    sinon.stub(productModel, 'findById').resolves(undefined);
+
+    const inputData = 999;
+    const responseData = {
+      message: 'Product not found',
+    };
+
+    const responseService = await productService.findProductById(inputData);
+
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.deep.equal(responseData);
+  });
+
   it('Criando um novo product com sucesso', async function () {
     sinon.stub(productModel, 'insert').resolves(productIdFromModel);
     sinon.stub(productModel, 'findById').resolves(productCreatedFromModel);

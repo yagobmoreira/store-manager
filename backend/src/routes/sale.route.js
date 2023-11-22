@@ -1,10 +1,16 @@
 const express = require('express');
 const { saleController } = require('../controllers');
+const middlewares = require('../middlewares');
 
 const route = express.Router();
 
 route.get('/', saleController.findAll);
 route.get('/:id', saleController.findById);
-route.post('/', saleController.createSale);
+route.post(
+  '/',
+  middlewares.validateSaleFields,
+  middlewares.validateProductId,
+  saleController.createSale,
+);
 
 module.exports = route;
