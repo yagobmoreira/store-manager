@@ -30,10 +30,17 @@ const deleteProduct = async (req, res) => {
   return res.status(mapStatusHTTP(status)).end();
 };
 
+const findByName = async (req, res) => {
+  const { q } = req.query;
+  const { status, data } = await productService.getProductByName(q);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   findAll,
   findById,
   createProduct,
   updateProduct,
   deleteProduct,
+  findByName,
 };

@@ -33,10 +33,21 @@ const deleteProduct = async (id) => {
   }
 };
 
+const getProductByName = async (name) => {
+  const products = await productModel.findAll();
+  const product = products.filter(({ name: productName }) => productName.includes(name));
+
+  if (!name) {
+    return { status: 'SUCCESSFUL', data: products };
+  }
+  return { status: 'SUCCESSFUL', data: product };
+};
+
 module.exports = {
   getAllProducts,
   findProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductByName,
 };
