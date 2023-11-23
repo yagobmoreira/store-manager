@@ -96,6 +96,11 @@ const saleUpdatedFromModel = [
   },
 ];
 
+const updatedSaleFromService = {
+  status: 'SUCCESSFUL',
+  data: { ...salesFromModel[0], quantity: 10 },
+};
+
 module.exports = {
   salesFromModel,
   saleFromModel,
@@ -108,4 +113,5 @@ module.exports = {
   saleCreatedFromModel,
   salesFromDB,
   saleUpdatedFromModel,
+  updatedSaleFromService,
 };

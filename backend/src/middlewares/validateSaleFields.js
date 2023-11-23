@@ -1,7 +1,7 @@
 const schema = require('./validations/validateInputValues');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
 
-const validateSaleFields = async (req, res, next) => {
+const validateSaleFields = (req, res, next) => {
   const saleData = req.body;
 
   const error = schema.validateAddSale(saleData);

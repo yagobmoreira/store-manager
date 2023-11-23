@@ -17,25 +17,25 @@ describe('Realizando testes - PRODUCT SERVICE', function () {
   it('Recuperando products com sucesso', async function () {
     sinon.stub(productModel, 'findAll').resolves(productsFromModel);
 
-    const responseData = [
-      {
-        id: 1,
-        name: 'Martelo de Thor',
-      },
-      {
-        id: 2,
-        name: 'Traje de encolhimento',
-      },
-      {
-        id: 3,
-        name: 'Escudo do Capitão América',
-      },
-    ];
+    // const responseData = [
+    //   {
+    //     id: 1,
+    //     name: 'Martelo de Thor',
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Traje de encolhimento',
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'Escudo do Capitão América',
+    //   },
+    // ];
 
     const responseService = await productService.getAllProducts();
 
     expect(responseService.status).to.be.equal('SUCCESSFUL');
-    expect(responseService.data).to.deep.equal(responseData);
+    expect(responseService.data).to.deep.equal(productsFromModel);
   });
 
   it('Recuperando um product pelo id com sucesso', async function () {
@@ -111,5 +111,15 @@ describe('Realizando testes - PRODUCT SERVICE', function () {
 
     const responseService = await productService.deleteProduct(inputData);
     expect(responseService.status).to.be.equal('NO_CONTENT');
+  });
+
+  it('Recuperando product pelo name', async function () {
+    sinon.stub(productModel, 'findAll').resolves(productsFromModel);
+
+    const inputData = 'Martelo';
+
+    const responseService = await productService.getProductByName(inputData);
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+    expect(responseService.data).to.deep.equal([productFromModel]);
   });
 });
