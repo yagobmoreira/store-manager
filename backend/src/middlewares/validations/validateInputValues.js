@@ -1,4 +1,4 @@
-const { addProductSchema, addSaleSchema } = require('./schemas');
+const { addProductSchema, addSaleSchema, updateQuantitySchema } = require('./schemas');
 
 function validateAddProduct(keysObjectToValidate) {
   const { error } = addProductSchema.validate(keysObjectToValidate);
@@ -32,7 +32,16 @@ function validateAddSale(keysObjectToValidate) {
   if (error) return { status: 'INVALID_VALUE', message: formatErrorMsg(error.message) };
 }
 
+function validateUpdateQuantity(keysObjectToValidate) {
+  const { error } = updateQuantitySchema.validate(keysObjectToValidate);
+  if (error && error.message === '"quantity" is required') {
+    return { status: 'BAD_REQUEST', message: error.message };
+  }
+  if (error) return { status: 'INVALID_VALUE', message: error.message };
+}
+
 module.exports = {
   validateAddProduct,
   validateAddSale,
+  validateUpdateQuantity,
 };

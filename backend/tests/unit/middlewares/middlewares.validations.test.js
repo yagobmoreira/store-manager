@@ -68,4 +68,29 @@ describe('Realizando testes - SCHEMA', function () {
       expect(response).to.be.equal(undefined);
     });
   });
+
+  describe('ValidateUpdateQuantity', function () {
+    it('Requisição sem quantity', function () {
+      const keysObjectToValidate = {};
+      const response = schema.validateUpdateQuantity(keysObjectToValidate);
+
+      expect(response.status).to.be.equal('BAD_REQUEST');
+      expect(response.message).to.be.equal('"quantity" is required');
+    });
+
+    it('Requisição com quantity menor que 1', function () {
+      const keysObjectToValidate = { quantity: 0 };
+      const response = schema.validateUpdateQuantity(keysObjectToValidate);
+
+      expect(response.status).to.be.equal('INVALID_VALUE');
+      expect(response.message).to.be.equal('"quantity" must be greater than or equal to 1');
+    });
+
+    it('Requisição com quantity válido', function () {
+      const keysObjectToValidate = { quantity: 1 };
+      const response = schema.validateUpdateQuantity(keysObjectToValidate);
+
+      expect(response).to.be.equal(undefined);
+    });
+  });
 });

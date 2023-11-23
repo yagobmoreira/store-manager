@@ -26,9 +26,19 @@ const deleteSale = async (id) => {
   }
 };
 
+const updateQuantity = async (saleId, productId, quantity) => {
+  const affectedRows = await saleModel.update(saleId, productId, quantity);
+  if (affectedRows > 0) {
+    const salesById = await saleModel.findById(saleId);
+    const saleByProductId = salesById.find((sale) => sale.productId === Number(productId));
+    return { status: 'SUCCESSFUL', data: { saleId: Number(saleId), ...saleByProductId } };
+  }
+};
+
 module.exports = {
   getAllSales,
   findSaleById,
   createSale,
   deleteSale,
+  updateQuantity,
 };

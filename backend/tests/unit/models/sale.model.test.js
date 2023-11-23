@@ -7,6 +7,7 @@ const {
   saleFromModel,
   saleIdFromDB,
   saleIdFromModel,
+  salesFromDB,
 } = require('../mocks/sales.mock');
 
 describe('Realizando Testes - SALE MODEL', function () {
@@ -83,5 +84,86 @@ describe('Realizando Testes - SALE MODEL', function () {
 
     expect(affectedRows).to.be.a('number');
     expect(affectedRows).to.be.equal(0);
+  });
+
+  it('Atualizando a quantidade de uma sale com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const inputData = {
+      saleId: 1,
+      productId: 1,
+      quantity: 1,
+    };
+    const affectedRows = await saleModel.update(
+      inputData.saleId,
+      inputData.productId,
+      inputData.quantity,
+    );
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(1);
+  });
+
+  it('Não atualiza a quantidade de uma sale com id inválido', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+
+    const inputData = {
+      saleId: 77136712,
+      productId: 1,
+      quantity: 1,
+    };
+    const affectedRows = await saleModel.update(
+      inputData.saleId,
+      inputData.productId,
+      inputData.quantity,
+    );
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(0);
+  });
+
+  it('Não atualiza a quantidade de uma sale com productId inválido', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+
+    const inputData = {
+      saleId: 1,
+      productId: 77136712,
+      quantity: 1,
+    };
+    const affectedRows = await saleModel.update(
+      inputData.saleId,
+      inputData.productId,
+      inputData.quantity,
+    );
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(0);
+  });
+
+  it('Não atualiza a quantidade de uma sale com quantidade inválida', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 0 }]);
+
+    const inputData = {
+      saleId: 1,
+      productId: 1,
+      quantity: -1,
+    };
+    const affectedRows = await saleModel.update(
+      inputData.saleId,
+      inputData.productId,
+      inputData.quantity,
+    );
+
+    expect(affectedRows).to.be.a('number');
+    expect(affectedRows).to.be.equal(0);
+  });
+
+  it('Recuperando todas as sales com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([salesFromDB]);
+
+    const products = await saleModel.getAllSales();
+
+    expect(products).to.be.an('array');
+    expect(products).to.deep.equal(salesFromDB);
   });
 });

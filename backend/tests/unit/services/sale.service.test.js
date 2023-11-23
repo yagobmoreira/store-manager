@@ -6,6 +6,7 @@ const {
   salesFromModel,
   saleFromModel,
   saleIdFromModel,
+  saleUpdatedFromModel,
 } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE SERVICE', function () {
@@ -118,5 +119,49 @@ describe('Realizando testes - SALE SERVICE', function () {
     const responseService = await saleService.deleteSale(inputData);
 
     expect(responseService.status).to.be.equal('NO_CONTENT');
+  });
+
+  it('Não remove uma sale com falha', async function () {
+    sinon.stub(saleModel, 'remove').resolves(0);
+
+    const inputData = 1;
+    const responseService = await saleService.deleteSale(inputData);
+
+    expect(responseService).to.be.equal(undefined);
+  });
+
+  it('Atualizando a quantidade de uma sale com sucesso', async function () {
+    sinon.stub(saleModel, 'update').resolves(1);
+    sinon.stub(saleModel, 'findById').resolves(saleUpdatedFromModel);
+
+    const inputData = {
+      saleId: '1',
+      productId: '1',
+      quantity: 1,
+    };
+    
+    const responseData = {
+      saleId: 1,
+      ...saleUpdatedFromModel[0],
+    };
+
+    const responseService = await saleService.updateQuantity(...Object.values(inputData));
+    
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+    expect(responseService.data).to.deep.equal(responseData);
+  });
+
+  it('Não atualiza a quantidade de uma sale com falha', async function () {
+    sinon.stub(saleModel, 'update').resolves(0);
+
+    const inputData = {
+      saleId: '1',
+      productId: '1',
+      quantity: 1,
+    };
+
+    const responseService = await saleService.updateQuantity(...Object.values(inputData));
+
+    expect(responseService).to.be.equal(undefined);
   });
 });

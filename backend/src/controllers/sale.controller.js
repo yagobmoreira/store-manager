@@ -23,9 +23,17 @@ const deleteSale = async (req, res) => {
   return res.status(mapStatusHTTP(status)).end();
 };
 
+const updateQuantity = async (req, res) => {
+  const { saleId, productId } = req.params;
+  const { quantity } = req.body;
+  const { status, data } = await saleService.updateQuantity(saleId, productId, quantity);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   findAll,
   findById,
   createSale,
   deleteSale,
+  updateQuantity,
 };

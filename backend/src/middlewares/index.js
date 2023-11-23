@@ -3,6 +3,8 @@ const validateSaleFields = require('./validateSaleFields');
 const validateProductIdFromSales = require('./validateProductIdFromSales');
 const validadeProductId = require('./validateProductId');
 const validateSaleId = require('./validateSaleId');
+const validateUpdateQuantityBody = require('./validateUpdateQuantityBody');
+const validateUpdateQuantityParams = require('./validateUpdateQuantityParams');
 
 module.exports = {
   validateProductFields,
@@ -10,4 +12,6 @@ module.exports = {
   validateProductIdFromSales,
   validadeProductId,
   validateSaleId,
+  validateUpdateQuantityBody,
+  validateUpdateQuantityParams,
 };

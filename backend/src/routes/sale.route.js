@@ -17,5 +17,11 @@ route.delete(
   middlewares.validateSaleId,
   saleController.deleteSale,
 );
+route.put(
+  '/:saleId/products/:productId/quantity',
+  middlewares.validateUpdateQuantityBody,
+  middlewares.validateUpdateQuantityParams,
+  saleController.updateQuantity,
+);
 
 module.exports = route;
