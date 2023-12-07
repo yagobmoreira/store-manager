@@ -1,0 +1,218 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Store Manager",
+    "dateExported": "2023-12-07T12:34:52.685Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Products",
+            "containerId": "",
+            "created": "2023-11-21T20:14:27.578Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Sales",
+            "containerId": "",
+            "created": "2023-11-21T20:14:37.023Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "c33102d7-b431-452f-86ca-d9b71fc67187",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "",
+            "name": "Server Up",
+            "url": "http://localhost:3001/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-11-21T17:39:49.439Z",
+            "modified": "2023-11-21T17:40:04.166Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c6db3ed5-02a5-40f5-a2f6-a91e58e2939d",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Get All Products",
+            "url": "http://localhost:3001/products",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-11-21T17:47:06.533Z",
+            "modified": "2023-11-21T17:47:17.553Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "cbdb322d-cc91-4b7d-9763-171a9f1a3c8c",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Get All Sales",
+            "url": "http://localhost:3001/sales",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-11-21T20:14:13.115Z",
+            "modified": "2023-11-21T20:18:12.859Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "63bcbaec-7eb4-4558-9b1e-a5c7cf78e84e",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Get Product By Id",
+            "url": "http://localhost:3001/products/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-11-21T18:25:53.384Z",
+            "modified": "2023-11-23T13:33:28.837Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d34da02a-4f3a-440f-846e-4da4cbb7b3f9",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Get Sale By Id",
+            "url": "http://localhost:3001/sales/6",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-11-21T20:18:22.240Z",
+            "modified": "2023-11-23T15:00:45.185Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7aa2fc00-7d6c-48e8-ad01-cbd9a6944f56",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Create New Product",
+            "url": "http://localhost:3001/products",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-11-21T20:59:41.147Z",
+            "modified": "2023-11-21T22:08:23.473Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Produto1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0ff36449-d2d2-4ecf-bf8c-8fe0438be976",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Create New Sale",
+            "url": "http://localhost:3001/sales",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-11-22T11:52:23.266Z",
+            "modified": "2023-11-23T15:08:14.674Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "46227d8d-a8fb-4a1c-8a58-abe286ab28c2",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Update Product",
+            "url": "http://localhost:3001/products/1",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2023-11-22T20:01:35.607Z",
+            "modified": "2023-12-07T12:08:08.264Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Martelo do Batman\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "581d0edf-504c-4f5a-ae98-595dd12919a2",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Search a product by name",
+            "url": "http://localhost:3001/products/search?q=traje",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-12-07T12:19:28.634Z",
+            "modified": "2023-12-07T12:21:23.846Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "q",
+                    "value": "traje",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "c6b88e20-fcab-4309-903b-aa72c6b610c5",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "193fc598-52d1-4772-be35-efba1b1ef76c",
+            "name": "Delete a product",
+            "url": "http://localhost:3001/products/2",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2023-12-07T12:21:59.977Z",
+            "modified": "2023-12-07T12:22:34.920Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1451fbc1-02d2-40cd-bebc-5c195c597d6f",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Delete a sale",
+            "url": "http://localhost:3001/sales/3",
+            "method": "DELETE",
+            "sortNum": 120000,
+            "created": "2023-12-07T12:28:56.483Z",
+            "modified": "2023-12-07T12:29:26.297Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "10fd6df9-94c8-43f6-92b3-8464d754969f",
+            "colId": "d4d374e0-fc7a-4b56-9677-b26a9c140dd5",
+            "containerId": "5cfcb5f4-e00e-4d8c-b0be-856b036e2de0",
+            "name": "Update a sale",
+            "url": "http://localhost:3001/sales/1/products/1/quantity",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2023-12-07T12:29:45.346Z",
+            "modified": "2023-12-07T12:33:41.452Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"quantity\": 30\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
