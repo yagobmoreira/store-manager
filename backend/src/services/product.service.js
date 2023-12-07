@@ -35,7 +35,8 @@ const deleteProduct = async (id) => {
 
 const getProductByName = async (name) => {
   const products = await productModel.findAll();
-  const product = products.filter(({ name: productName }) => productName.includes(name));
+  const product = products
+    .filter(({ name: productName }) => productName.toLowerCase().includes(name.toLowerCase()));
 
   if (!name) {
     return { status: 'SUCCESSFUL', data: products };
